@@ -1,0 +1,129 @@
+# ---------------------------------------------------------------------------
+# CV content: System Integration & Validation variant
+# ---------------------------------------------------------------------------
+# Markup: **text** -> bold. Keep every claim traceable to an approved source.
+# Source of truth: Naor_Larian_CV(5).pdf + verified facts in the 2026-11 brief.
+# ---------------------------------------------------------------------------
+
+output_name: Naor_Larian_CV_System_Integration_v1
+
+meta:
+  title: "Naor Larian – System Integration & Validation Engineer (Junior)"
+  keywords: >-
+    System Integration, System Validation, Integration Engineer, Fault Isolation,
+    Troubleshooting, RF Spectrum Analysis, Satellite Communication, SATCOM, VSAT,
+    Interference Investigation, CPI Testing, Commissioning, FPGA, VHDL, Vivado,
+    Artix-7, UART, ESP32, VGA, RTL Simulation, Testbenches, SOP, Technical Documentation
+
+name: Naor Larian
+headline:
+  - System Integration & Validation
+  - Electrical Engineering Student
+
+contact:
+  - naorlarian@gmail.com
+  - +972-50-787-8716
+  - linkedin.com/in/naor-larian
+  - Central Israel
+
+summary: >-
+  **Final-year B.Sc. Electrical & Electronics Engineering student** (expected 2027) with
+  nearly four years of {hands-on} experience on **live satellite communication systems**
+  at AMOS-Spacecom: fault isolation, RF spectrum measurements, link diagnostics,
+  interference investigation and CPI testing, in close coordination with customers and
+  engineering teams. Adds **FPGA hardware integration** experience from a VHDL/Artix-7
+  system demonstrated on physical hardware.
+
+experience_title: Experience
+experience:
+  - role: Technical Support Engineer
+    org: AMOS-Spacecom
+    org_note: Satellite Operator
+    dates: Dec 2022 – Present
+    bullets:
+      - >-
+        Troubleshoot **15–25 technical incidents per week** on live satellite
+        communication systems, correlating RF spectrum measurements, modem indicators
+        and link performance data to isolate faults.
+      - >-
+        Investigate **RF interference** and link degradation using spectrum analysis
+        and step-by-step fault isolation, coordinating resolution with customers and
+        internal engineering teams.
+      - >-
+        Support approximately **10–15 CPI tests per month**, performing operator-side
+        RF measurements and guiding customers through test procedures during
+        commissioning-related activities.
+      - >-
+        Provide operational integration support for **VSAT systems**, coordinating
+        between customers and engineering teams.
+      - >-
+        Wrote and refined **technical SOPs** that made troubleshooting more consistent
+        and critical procedures faster to locate.
+
+projects_title: Engineering Projects
+projects:
+  - name: Cyber Gladiators
+    kind: Independent FPGA Project
+    dates: "2026"
+    stack: VHDL · Xilinx Vivado · Basys 3 (Artix-7) · ESP32 · UART · VGA
+    bullets:
+      - >-
+        Designed a modular **VHDL system** with 640 × 480 VGA output, sprite rendering,
+        FSM-based control, collision detection and game logic.
+      - >-
+        **Integrated an ESP32 controller over UART** and debugged the {UART-to-VGA} data
+        path on physical FPGA hardware.
+      - >-
+        Verified RTL modules in simulation, synthesized and implemented the design in
+        Vivado, and **demonstrated the full system on a Basys 3 board**.
+  - name: RGB Median Filter
+    kind: Afeka Team Project
+    dates: "2026"
+    stack: VHDL · FSM · RAM/ROM · RTL Simulation · Testbenches
+    bullets:
+      - >-
+        Developed internal **VHDL components** and integrated FSM control, data buffers
+        and RAM/ROM handling for a {3 × 3} RGB median filter.
+      - >-
+        Verified module- and top-level behavior through **RTL simulation and
+        testbenches** using image test data.
+
+sidebar:
+  - title: Education
+    type: education
+    items:
+      - degree: B.Sc. Electrical & Electronics Engineering
+        dates: Expected 2027
+        school: Afeka Tel Aviv Academic College of Engineering
+        note: "Specializations: Computers & Communications"
+      - degree: Practical Engineer Diploma, Electrical Engineering
+        dates: "2022"
+        school: Handessaim Tel Aviv
+        note: Graduated with honors
+
+  - title: Technical Skills
+    type: skills
+    groups:
+      - label: Systems & RF
+        items: RF spectrum measurements, satellite link diagnostics, VSAT systems,
+          interference investigation, fault isolation, CPI testing
+      - label: Integration & Verification
+        items: Hardware integration, on-board debugging, RTL simulation, testbenches,
+          technical SOPs
+      - label: FPGA & Digital
+        items: VHDL, FSM design, Xilinx Vivado, {Artix-7 / Basys 3}
+      - label: Interfaces
+        items: UART, VGA, ESP32, RAM/ROM
+      - label: Programming & Tools
+        items: Spectrum analyzer (professional); C, Python, {MATLAB/Simulink} (academic)
+
+  - title: Relevant Coursework
+    type: text
+    text: Communication Systems, Digital Signal Processing, Signals & Systems,
+      Advanced Hardware Design
+
+  - title: Languages
+    type: languages
+    items:
+      - [Hebrew, Native]
+      - [English, Professional working proficiency]

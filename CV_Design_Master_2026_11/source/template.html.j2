@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ meta.title }}</title>
+<meta name="author" content="{{ name }}">
+<meta name="keywords" content="{{ meta.keywords }}">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="page" id="page">
+
+  <!-- HEADER BAND ---------------------------------------------------------->
+  <header class="band">
+    <div class="band__id">
+      <h1 class="name">{{ name }}</h1>
+      <p class="headline">{{ headline[0] }}<span class="sep" aria-hidden="true"></span>{{ headline[1] }}</p>
+    </div>
+    <ul class="band__contact">
+      {% for c in contact %}{% set h = c | href %}<li>{% if h %}<a href="{{ h }}">{{ c }}</a>{% else %}{{ c }}{% endif %}</li>{% endfor %}
+    </ul>
+  </header>
+
+  <!-- SUMMARY -------------------------------------------------------------->
+  <section class="section section--summary">
+    <h2 class="h"><span class="plus" aria-hidden="true"></span>Summary</h2>
+    <p class="summary">{{ summary | md }}</p>
+  </section>
+
+  <!-- TWO COLUMNS (DOM order = reading order: main column, then sidebar) ---->
+  <div class="cols">
+    <div class="col col--main">
+
+      <section class="section">
+        <h2 class="h"><span class="plus" aria-hidden="true"></span>{{ experience_title }}</h2>
+        {% for e in experience %}
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title"><span class="dot" aria-hidden="true"></span>{{ e.role }}</h3>
+            <span class="entry__date">{{ e.dates }}</span>
+          </div>
+          <p class="entry__sub"><strong>{{ e.org }}</strong>{% if e.org_note %} · {{ e.org_note }}{% endif %}</p>
+          <ul class="bullets">
+            {% for b in e.bullets %}<li>{{ b | md }}</li>{% endfor %}
+          </ul>
+        </article>
+        {% endfor %}
+      </section>
+
+      <section class="section">
+        <h2 class="h"><span class="plus" aria-hidden="true"></span>{{ projects_title }}</h2>
+        {% for p in projects %}
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title"><span class="dot" aria-hidden="true"></span>{{ p.name }}<span class="entry__kind"> – {{ p.kind }}</span></h3>
+            <span class="entry__date">{{ p.dates }}</span>
+          </div>
+          {% if p.stack %}<p class="entry__stack">{{ p.stack }}</p>{% endif %}
+          <ul class="bullets">
+            {% for b in p.bullets %}<li>{{ b | md }}</li>{% endfor %}
+          </ul>
+        </article>
+        {% endfor %}
+      </section>
+
+    </div>
+
+    <aside class="col col--side">
+      {% for s in sidebar %}
+      <section class="section">
+        <h2 class="h"><span class="plus" aria-hidden="true"></span>{{ s.title }}</h2>
+
+        {% if s.type == 'education' %}
+          {% for ed in s["items"] %}
+          <div class="edu">
+            <p class="edu__date">{{ ed.dates }}</p>
+            <h3 class="edu__degree">{{ ed.degree }}</h3>
+            <p class="edu__school">{{ ed.school }}</p>
+            {% if ed.note %}<p class="edu__note">{{ ed.note }}</p>{% endif %}
+          </div>
+          {% endfor %}
+
+        {% elif s.type == 'skills' %}
+          {% for g in s.groups %}
+          <div class="skill">
+            <h3 class="skill__label">{{ g.label }}</h3>
+            <p class="skill__items">{{ g["items"] | md }}</p>
+          </div>
+          {% endfor %}
+
+        {% elif s.type == 'languages' %}
+          {% for lang, level in s["items"] %}
+          <p class="lang"><strong>{{ lang }}</strong> – {{ level }}</p>
+          {% endfor %}
+
+        {% else %}
+          <p class="side-text">{{ s.text | md }}</p>
+        {% endif %}
+      </section>
+      {% endfor %}
+    </aside>
+  </div>
+
+</main>
+</body>
+</html>
