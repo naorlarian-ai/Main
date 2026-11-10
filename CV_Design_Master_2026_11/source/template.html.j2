@@ -1,3 +1,54 @@
+{% macro section(s) %}
+      <section class="section">
+        <h2 class="h"><span class="plus" aria-hidden="true"></span>{{ s.title }}</h2>
+
+        {% if s.type == 'experience' %}
+        {% for e in s["items"] %}
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title"><span class="dot" aria-hidden="true"></span>{{ e.role }}</h3>
+            <span class="entry__date">{{ e.dates }}</span>
+          </div>
+          <p class="entry__sub"><strong>{{ e.org }}</strong>{% if e.org_note %} · {{ e.org_note }}{% endif %}</p>
+          <ul class="bullets">
+            {% for b in e.bullets %}<li>{{ b | md }}</li>{% endfor %}
+          </ul>
+        </article>
+        {% endfor %}
+
+        {% elif s.type == 'projects' %}
+        {% for p in s["items"] %}
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title"><span class="dot" aria-hidden="true"></span>{{ p.name }}<span class="entry__kind"> – {{ p.kind }}</span></h3>
+            <span class="entry__date">{{ p.dates }}</span>
+          </div>
+          {% if p.stack %}<p class="entry__stack">{{ p.stack | md }}</p>{% endif %}
+          <ul class="bullets">
+            {% for b in p.bullets %}<li>{{ b | md }}</li>{% endfor %}
+          </ul>
+        </article>
+        {% endfor %}
+
+        {% elif s.type == 'education' %}
+        {% for ed in s["items"] %}
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title"><span class="dot" aria-hidden="true"></span>{{ ed.degree }}</h3>
+            <span class="entry__date">{{ ed.dates }}</span>
+          </div>
+          <p class="entry__sub"><strong>{{ ed.school }}</strong>{% if ed.note %} · {{ ed.note }}{% endif %}</p>
+          {% if ed.bullets %}<ul class="bullets">
+            {% for b in ed.bullets %}<li>{{ b | md }}</li>{% endfor %}
+          </ul>{% endif %}
+        </article>
+        {% endfor %}
+
+        {% else %}
+        <p>{{ s.text | md }}</p>
+        {% endif %}
+      </section>
+{% endmacro %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,42 +78,13 @@
     <p class="summary">{{ summary | md }}</p>
   </section>
 
+  <!-- OPTIONAL FULL-WIDTH SECTIONS ---------------------------------------->
+  {% for s in top %}<div class="full">{{ section(s) }}</div>{% endfor %}
+
   <!-- TWO COLUMNS (DOM order = reading order: main column, then sidebar) ---->
   <div class="cols">
     <div class="col col--main">
-
-      <section class="section">
-        <h2 class="h"><span class="plus" aria-hidden="true"></span>{{ experience_title }}</h2>
-        {% for e in experience %}
-        <article class="entry">
-          <div class="entry__head">
-            <h3 class="entry__title"><span class="dot" aria-hidden="true"></span>{{ e.role }}</h3>
-            <span class="entry__date">{{ e.dates }}</span>
-          </div>
-          <p class="entry__sub"><strong>{{ e.org }}</strong>{% if e.org_note %} · {{ e.org_note }}{% endif %}</p>
-          <ul class="bullets">
-            {% for b in e.bullets %}<li>{{ b | md }}</li>{% endfor %}
-          </ul>
-        </article>
-        {% endfor %}
-      </section>
-
-      <section class="section">
-        <h2 class="h"><span class="plus" aria-hidden="true"></span>{{ projects_title }}</h2>
-        {% for p in projects %}
-        <article class="entry">
-          <div class="entry__head">
-            <h3 class="entry__title"><span class="dot" aria-hidden="true"></span>{{ p.name }}<span class="entry__kind"> – {{ p.kind }}</span></h3>
-            <span class="entry__date">{{ p.dates }}</span>
-          </div>
-          {% if p.stack %}<p class="entry__stack">{{ p.stack }}</p>{% endif %}
-          <ul class="bullets">
-            {% for b in p.bullets %}<li>{{ b | md }}</li>{% endfor %}
-          </ul>
-        </article>
-        {% endfor %}
-      </section>
-
+      {% for s in main %}{{ section(s) }}{% endfor %}
     </div>
 
     <aside class="col col--side">

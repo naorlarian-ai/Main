@@ -1,0 +1,51 @@
+{
+  "pages": 1,
+  "page_size_pt": [
+    595.0,
+    841.9
+  ],
+  "text_bbox_pt": [
+    37.0,
+    51.6,
+    551.3,
+    766.9
+  ],
+  "right_margin_pt": 43.7,
+  "bottom_margin_pt": 75.1,
+  "fonts_embedded": [
+    "AAAAAA+NotoSerif-Regular",
+    "BAAAAA+NotoSerif-Bold",
+    "CAAAAA+NotoSerif-Italic",
+    "DAAAAA+NotoSerif-SemiBold"
+  ],
+  "font_sizes_pt": [
+    8.3,
+    8.4,
+    8.7,
+    8.9,
+    9.0,
+    9.5,
+    9.8,
+    10.5,
+    31.0
+  ],
+  "word_count": 411,
+  "non_ascii_glyphs": [
+    "·",
+    "×",
+    "–"
+  ],
+  "reading_order_ok": true,
+  "page_overflow": false,
+  "main_bottom_pt": 732,
+  "side_bottom_pt": 766.3,
+  "content_limit_pt": 807.9,
+  "main_slack_pt": 75.9,
+  "side_slack_pt": 41.6,
+  "fonts_loaded": [
+    "400normal",
+    "400italic",
+    "600normal",
+    "700normal"
+  ]
+}

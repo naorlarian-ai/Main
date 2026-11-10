@@ -1,0 +1,124 @@
+# ---------------------------------------------------------------------------
+# Variant 07: FPGA / RTL Internship (Qualcomm)                 (DRAFT, phase 2)
+# No job description was available in the project, so this is tailored to the FPGA/RTL
+# internship role family. No Verilog, SystemVerilog or UVM (not supported by sources).
+# Main order: projects, experience. Education leads the sidebar.
+# Build from CV_Design_Master_2026_11/source:
+#   python3 build.py ../Phase2_Variants/07_Qualcomm_FPGA_Intern/<this>.yaml \
+#           --out ../Phase2_Variants/07_Qualcomm_FPGA_Intern --qa-json
+# ---------------------------------------------------------------------------
+
+output_name: Naor_Larian_CV_07_Qualcomm_FPGA_Intern
+
+meta:
+  title: "Naor Larian – Electrical Engineering Student | FPGA / RTL Internship"
+  keywords: >-
+    Electrical Engineering Student, FPGA Intern, RTL Intern, VHDL, RTL Design, FSM,
+    Datapath, Modular Architecture, RTL Simulation, Testbenches, Synthesis, Implementation,
+    Xilinx Vivado, Artix-7, Basys 3, UART, VGA, ESP32, RAM/ROM, Hardware Debugging
+
+qa_keywords: [FPGA, RTL, VHDL, FSM, architecture, simulation, testbenches, synthesized,
+  implemented, Vivado, Artix-7, Basys 3, UART, VGA, ESP32, RAM/ROM, debugging, 2027]
+
+name: Naor Larian
+headline: [Electrical Engineering Student, FPGA / RTL Internship]
+
+contact: [naorlarian@gmail.com, +972-50-787-8716, linkedin.com/in/naor-larian, Central Israel]
+
+summary: >-
+  **Final-year B.Sc. Electrical & Electronics Engineering student** (Computers &
+  Communications, expected 2027) seeking an **FPGA / RTL internship**. Hands-on VHDL
+  experience across the FPGA flow, from FSM-based architecture and RTL simulation to
+  synthesis, implementation and on-board debugging in Xilinx Vivado, demonstrated on
+  physical Artix-7 hardware. Nearly four years of troubleshooting live satellite systems
+  reinforce a systematic approach to debugging.
+
+main:
+  - type: projects
+  - type: experience
+
+experience_title: Experience
+experience:
+  - role: Technical Support Engineer
+    org: AMOS-Spacecom
+    org_note: Satellite Operator
+    dates: Dec 2022 – Present
+    bullets:
+      - >-
+        Troubleshoot **15–25 technical incidents per week** on live satellite
+        communication systems, correlating RF spectrum measurements, modem indicators
+        and link performance data to isolate faults.
+      - >-
+        Remotely support VSAT systems and approximately **10–15 CPI** and **10–15
+        commissioning activities** per month, coordinating with customers and
+        engineering teams.
+      - >-
+        Develop and refine **technical SOPs** that improve troubleshooting consistency
+        and make critical procedures easier to find.
+
+projects_title: FPGA / RTL Projects
+projects:
+  - name: Cyber Gladiators
+    kind: Independent FPGA Project
+    dates: "2026"
+    stack: VHDL · Basys 3 (Artix-7) · ESP32 · UART · VGA · {Implemented on hardware}
+    bullets:
+      - >-
+        Designed a **modular VHDL architecture** with **FSM-based control** for real-time
+        640 × 480 VGA output, sprite rendering, collision detection and game logic.
+      - >-
+        **Integrated an ESP32 controller over UART** as the external control interface.
+      - >-
+        **Verified RTL modules in simulation**, synthesized and implemented the design in
+        Vivado, then **debugged the {UART-to-VGA} path on a physical Basys 3 board**.
+  - name: RGB Median Filter
+    kind: Afeka Team Project
+    dates: "2026"
+    stack: VHDL · FSM · RAM/ROM · RTL Simulation · Testbenches · {Simulation-verified}
+    bullets:
+      - >-
+        Developed internal **VHDL components** for a {3 × 3} RGB median-filter
+        architecture.
+      - >-
+        Integrated **FSM control, data buffers and RAM/ROM handling** into the datapath.
+      - >-
+        Verified module- and top-level behavior through **RTL simulation and testbenches**
+        using image test data.
+
+sidebar:
+  - title: Education
+    type: education
+    items:
+      - degree: B.Sc. Electrical & Electronics Engineering
+        dates: Expected 2027
+        school: Afeka Tel Aviv Academic College of Engineering
+        note: "Specializations: Computers & Communications"
+      - degree: Practical Engineer Diploma, Electrical Engineering
+        dates: "2022"
+        school: Handessaim Tel Aviv
+        note: Graduated with honors
+
+  - title: Technical Skills
+    type: skills
+    groups:
+      - label: HDL & RTL Design
+        items: VHDL, FSM design, modular RTL architecture, datapath integration
+      - label: Verification
+        items: RTL simulation, testbenches
+      - label: FPGA Flow & Debug
+        items: Xilinx Vivado (synthesis, implementation), on-board debugging
+      - label: Hardware & Interfaces
+        items: Artix-7 / Basys 3, ESP32, UART, VGA, RAM/ROM
+      - label: Programming & Tools
+        items: C, Python, MATLAB (academic); spectrum analyzer (professional)
+
+  - title: Relevant Coursework
+    type: text
+    text: Advanced Hardware Design, Digital Signal Processing, Signals & Systems,
+      Communication Systems
+
+  - title: Languages
+    type: languages
+    items:
+      - [Hebrew, Native]
+      - [English, Professional working proficiency]

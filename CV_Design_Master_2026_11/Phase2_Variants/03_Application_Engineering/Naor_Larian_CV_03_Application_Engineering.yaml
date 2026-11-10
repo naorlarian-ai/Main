@@ -1,0 +1,127 @@
+# ---------------------------------------------------------------------------
+# Variant 03: Junior Application / Field Application Engineer   (DRAFT, phase 2)
+# Note: the headline says "Application Engineering". Nothing in the CV implies
+# on-site/field work: all customer work is remote, per the verified facts.
+# Build from CV_Design_Master_2026_11/source:
+#   python3 build.py ../Phase2_Variants/03_Application_Engineering/<this>.yaml \
+#           --out ../Phase2_Variants/03_Application_Engineering --qa-json
+# ---------------------------------------------------------------------------
+
+output_name: Naor_Larian_CV_03_Application_Engineering
+
+meta:
+  title: "Naor Larian – Electrical Engineering Student | Application Engineering"
+  keywords: >-
+    Electrical Engineering Student, Application Engineer, Field Application Engineer,
+    Technical Support, Customer-Facing, Customer Guidance, Remote Configuration, Service
+    Activation, Modem Configuration, Link Verification, Troubleshooting, Fault Isolation,
+    Satellite Communication, VSAT, RF Spectrum Measurements, Technical Documentation, SOP,
+    FPGA, VHDL, ESP32, UART, Hardware Integration
+
+qa_keywords: [customer, configuration, service activation, link verification, troubleshooting,
+  fault isolation, engineering teams, SOP, VSAT, CPI, commissioning, RF spectrum, FPGA, VHDL,
+  ESP32, UART, English]
+
+name: Naor Larian
+headline: [Electrical Engineering Student, Application Engineering]
+
+contact: [naorlarian@gmail.com, +972-50-787-8716, linkedin.com/in/naor-larian, Central Israel]
+
+summary: >-
+  **Final-year B.Sc. Electrical & Electronics Engineering student** (expected 2027) with
+  nearly four years of **customer-facing technical experience** at a satellite operator.
+  Remotely configures, activates and troubleshoots VSAT services, guides customers through
+  technical procedures, and coordinates with engineering teams to resolve complex issues.
+  Complemented by **hands-on hardware integration** experience from an FPGA system
+  demonstrated on physical hardware.
+
+experience_title: Experience
+experience:
+  - role: Technical Support Engineer
+    org: AMOS-Spacecom
+    org_note: Satellite Operator
+    dates: Dec 2022 – Present
+    bullets:
+      - >-
+        Handle **15–25 technical incidents per week** on live satellite communication
+        systems, isolating faults through RF spectrum measurements, modem indicators and
+        link performance data.
+      - >-
+        Deliver **remote VSAT technical support**: modem configuration, link
+        verification, service activation, system monitoring and troubleshooting, tailored
+        to each customer's service agreement.
+      - >-
+        Remotely perform or support approximately **10–15 CPI activities** and
+        **10–15 commissioning activities** per month, **guiding customers** through each
+        procedure.
+      - >-
+        Coordinate between **customers and engineering teams** on complex cases,
+        including RF interference investigations.
+      - >-
+        Develop and refine **technical SOPs** that improve troubleshooting consistency
+        and make critical procedures easier to find.
+
+projects_title: Engineering Projects
+projects:
+  - name: Cyber Gladiators
+    kind: Independent FPGA Project
+    dates: "2026"
+    stack: VHDL · Xilinx Vivado · Basys 3 (Artix-7) · ESP32 · UART · VGA
+    bullets:
+      - >-
+        **Integrated an ESP32 controller with an FPGA over UART**, driving a modular
+        VHDL system with real-time 640 × 480 VGA output.
+      - >-
+        Verified RTL modules in simulation, then synthesized and implemented the design in
+        Xilinx Vivado.
+      - >-
+        Debugged the {UART-to-VGA} data path on hardware and **demonstrated the complete
+        system on a physical Basys 3 board**.
+  - name: RGB Median Filter
+    kind: Afeka Team Project
+    dates: "2026"
+    stack: VHDL · FSM · RAM/ROM · RTL Simulation · Testbenches
+    bullets:
+      - >-
+        Contributed VHDL components with FSM control, data buffers and RAM/ROM handling
+        to a team-built {3 × 3} RGB median filter.
+      - >-
+        Verified module- and top-level behavior with **RTL simulation and testbenches**
+        using image test data.
+
+sidebar:
+  - title: Education
+    type: education
+    items:
+      - degree: B.Sc. Electrical & Electronics Engineering
+        dates: Expected 2027
+        school: Afeka Tel Aviv Academic College of Engineering
+        note: "Specializations: Computers & Communications"
+      - degree: Practical Engineer Diploma, Electrical Engineering
+        dates: "2022"
+        school: Handessaim Tel Aviv
+        note: Graduated with honors
+
+  - title: Technical Skills
+    type: skills
+    groups:
+      - label: Customer-Facing Support
+        items: Remote configuration, service activation, customer guidance, technical
+          coordination, technical SOPs
+      - label: Satellite & RF
+        items: VSAT, link verification, RF spectrum measurements, interference
+          investigation, fault isolation, CPI and commissioning
+      - label: Hardware & FPGA
+        items: VHDL, Xilinx Vivado, Basys 3 (Artix-7), ESP32, UART, VGA
+      - label: Programming & Tools
+        items: Spectrum analyzer (professional); C, Python, {MATLAB/Simulink} (academic)
+
+  - title: Languages
+    type: languages
+    items:
+      - [Hebrew, Native]
+      - [English, Professional working proficiency]
+
+  - title: Relevant Coursework
+    type: text
+    text: Communication Systems, Digital Signal Processing, Advanced Hardware Design

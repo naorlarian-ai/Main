@@ -120,6 +120,9 @@ ul { list-style: none; }
 .section--summary { margin-top: 14pt; }
 .summary { text-align: left; hyphens: manual; }
 
+/* ---- Optional full-width sections (variants only; same styles as main) - */
+.full .entry + .entry { margin-top: 6pt; }
+
 /* ---- Columns ------------------------------------------------------------ */
 .cols {
   flex: 1;

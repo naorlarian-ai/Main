@@ -18,6 +18,13 @@ A4 = (595.3, 841.9)
 def md(text: str) -> str:
     """Minimal markup: escape HTML, **bold** -> <strong>, {text} -> no line break."""
     t = html.escape(" ".join(str(text).split()), quote=False)
+    # Automatic no-break groups (applied outside explicit {...} groups only):
+    #   number ranges / dimensions  "15–25", "640 × 480"
+    #   hyphenated compounds        "FSM-based", "operator-side", "UART-to-VGA"
+    def auto(seg):
+        seg = re.sub(r"(\d+(?:–| × )\d+)", r"{\1}", seg)
+        return re.sub(r"(?<![\w{-])(\w+(?:-\w+)+)(?![\w-])", r"{\1}", seg)
+    t = "".join(p if p.startswith("{") else auto(p) for p in re.split(r"(\{.*?\})", t))
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
     t = re.sub(r"\{(.+?)\}", r'<span class="nw">\1</span>', t)      # {no-wrap}
     # Widow control: keep the final two words of a paragraph on one line.
@@ -33,6 +40,43 @@ def contact_href(c: str):
     if c.startswith(("linkedin.com", "github.com", "www.")): return "https://" + c
     if c.startswith("+"): return "tel:" + c.replace("-", "")
     return None
+
+
+def normalize(data: dict) -> dict:
+    """Main-column section order. Default (master layout): Experience, then Projects.
+    A variant may set `main:` to a list of sections, e.g.
+      main: [{type: projects}, {type: experience}]   or
+      main: [{type: education, title: Education, items: [...]}, ...]
+    Experience/projects sections without `items` use the top-level lists."""
+    main = data.get("main") or [{"type": "experience"}, {"type": "projects"}]
+    out = []
+    for s in main:
+        s = dict(s)
+        if s["type"] in ("experience", "projects"):
+            s.setdefault("title", data[f"{s['type']}_title"])
+            s.setdefault("items", data[s["type"]])
+        out.append(s)
+    data["main"] = out
+    # Optional full-width sections between the summary and the two columns
+    # (e.g. Education for internship variants). Same styles as main-column sections.
+    data["top"] = data.get("top") or []
+    return data
+
+
+def reading_anchors(data: dict) -> list:
+    """Text fragments that must appear in this order in the extracted PDF text."""
+    def first_words(s, n=6):
+        return " ".join(re.sub(r"[*{}]", "", " ".join(str(s).split())).split()[:n])
+    anchors = ["SUMMARY"]
+    for s in data["top"] + data["main"]:
+        anchors.append(s["title"].upper())
+        items = s.get("items") or []
+        if items and items[0].get("bullets"):
+            anchors.append(first_words(items[0]["bullets"][0]))
+        if items and items[-1].get("bullets"):
+            anchors.append(first_words(items[-1]["bullets"][-1]))
+    anchors += [s["title"].upper() for s in data["sidebar"]]
+    return anchors
 
 
 def render_html(data: dict) -> Path:
@@ -60,13 +104,10 @@ def qa_pdf(pdf: Path, data: dict, metrics: dict) -> dict:
     sizes = sorted({round(s["size"], 1) for b in page.get_text("dict")["blocks"]
                     for l in b.get("lines", []) for s in l["spans"]})
     text = page.get_text()
-    # ATS reading-order check on the raw content stream: section headings, and the
-    # first bullet of each entry, must appear in document order.
+    # ATS reading-order check on the raw content stream: section headings and the
+    # first/last bullets of each main section must appear in document order.
     flat = " ".join(text.split())
-    def first_words(s, n=6): return " ".join(re.sub(r"[*{}]", "", " ".join(s.split())).split()[:n])
-    anchors = ["SUMMARY", data["experience_title"].upper(), first_words(data["experience"][0]["bullets"][0]),
-               data["projects_title"].upper(), first_words(data["projects"][-1]["bullets"][-1])]
-    anchors += [s["title"].upper() for s in data["sidebar"]]
+    anchors = reading_anchors(data)
     pos = [flat.find(a) for a in anchors]
     reading_order_ok = all(p >= 0 for p in pos) and pos == sorted(pos)
     report = {
@@ -93,9 +134,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("content")
     ap.add_argument("--out", default=str(HERE.parent))
+    ap.add_argument("--qa-json", action="store_true", help="also write the QA report as JSON next to the PDF")
     args = ap.parse_args()
 
-    data = yaml.safe_load(Path(args.content).read_text(encoding="utf-8"))
+    data = normalize(yaml.safe_load(Path(args.content).read_text(encoding="utf-8")))
     html_path = render_html(data)
     out_dir = Path(args.out); out_dir.mkdir(parents=True, exist_ok=True)
     pdf = out_dir / f"{data['output_name']}.pdf"
@@ -105,6 +147,8 @@ def main():
     report = qa_pdf(pdf, data, metrics)
     png(pdf, out_dir / f"{data['output_name']}_preview.png")
     print(json.dumps(report, indent=2, ensure_ascii=False))
+    (out_dir / f"{data['output_name']}_build_QA.json").write_text(
+        json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8") if args.qa_json else None
 
     problems = []
     if report["pages"] != 1: problems.append("not one page")

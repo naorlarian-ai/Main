@@ -11,7 +11,13 @@ source/
 ├── fonts/                            ← Noto Serif (SIL OFL), embedded in the PDF
 ├── build.py                          ← YAML → HTML → PDF → PNG + QA gate
 ├── render.js                         ← headless Chromium print + overflow metrics
-└── compare.py                        ← side-by-side vs. the reference
+├── verify.py                         ← extended checks (fonts, links, metadata, overlap,
+│                                       3-extractor reading order, bullet integrity,
+│                                       banned claims, per-variant keywords)
+├── compare.py                        ← side-by-side of two PDFs
+└── overview.py                       ← contact sheet of all 7 CVs
+
+Phase 2 variants live in ../Phase2_Variants/<NN_Name>/ (YAML source + outputs per folder).
 ```
 
 ## Build
@@ -31,7 +37,24 @@ Requirements: Python 3 with `pyyaml`, `jinja2` and `pymupdf`, plus Node with `pl
 | Markup | Effect |
 |---|---|
 | `**text**` | bold emphasis (use sparingly: 1 phrase per bullet) |
-| `{text}` | keep on one line (e.g. `{UART-to-VGA}`, `{3 × 3}`) |
+| `{text}` | keep on one line (e.g. `{Artix-7 / Basys 3}`) |
+
+Automatically kept on one line: number ranges and dimensions (`15–25`, `640 × 480`) and
+hyphenated compounds (`FSM-based`, `UART-to-VGA`).
+
+### Layout options (per variant, all optional)
+
+```yaml
+main:                      # main-column order (default: experience, projects)
+  - type: projects
+  - type: experience
+  - type: education        # also allowed in main/top, with title + items
+top:                       # full-width sections between summary and columns
+  - type: education
+    title: Education
+    items: [...]
+qa_keywords: [...]         # keywords verify.py must find in the PDF text
+```
 
 Contact entries become clickable links automatically (email, `linkedin.com/...`, phone).
 The last two words of every paragraph and bullet are automatically kept together (widow control).
@@ -44,6 +67,16 @@ The last two words of every paragraph and bullet are automatically kept together
   `opacity`, `transform` and `z-index` on text elements: Chromium paints those in a
   later layer, which moves their text to the end of the PDF stream.
 - reports embedded fonts, font sizes, margins, non-ASCII glyphs and word count
+
+## Variant build + verify
+
+```bash
+cd CV_Design_Master_2026_11/source
+V=../Phase2_Variants/04_Junior_FPGA
+NODE_PATH=$(npm root -g) python3 build.py $V/Naor_Larian_CV_04_Junior_FPGA.yaml --out $V --qa-json
+python3 verify.py $V/Naor_Larian_CV_04_Junior_FPGA.pdf --content $V/Naor_Larian_CV_04_Junior_FPGA.yaml
+python3 overview.py
+```
 
 ## Making a new variant
 

@@ -1,0 +1,129 @@
+# ---------------------------------------------------------------------------
+# Variant 05: Hardware / Electrical Engineering Internship (Google)   (DRAFT, phase 2)
+# No job description was available in the project, so this is tailored to the
+# hardware-internship role family, with no employer-specific requirements claimed.
+# Education is a full-width section directly under the summary (top:), then
+# main: projects, experience; sidebar: skills, languages.
+# Build from CV_Design_Master_2026_11/source:
+#   python3 build.py ../Phase2_Variants/05_Google_Hardware_Intern/<this>.yaml \
+#           --out ../Phase2_Variants/05_Google_Hardware_Intern --qa-json
+# ---------------------------------------------------------------------------
+
+output_name: Naor_Larian_CV_05_Google_Hardware_Intern
+
+meta:
+  title: "Naor Larian – Electrical Engineering Student | Hardware Engineering Internship"
+  keywords: >-
+    Electrical Engineering Student, Hardware Engineering Intern, Electrical Engineering
+    Intern, Digital Design, FPGA, VHDL, FSM, RTL Simulation, Testbenches, Xilinx Vivado,
+    Artix-7, ESP32, UART, VGA, Hardware Integration, Debugging, Signals & Systems, DSP,
+    Communication Systems, C, Python, MATLAB
+
+qa_keywords: [Electrical & Electronics Engineering, 2027, Afeka, honors, FPGA, VHDL, FSM,
+  simulation, testbenches, Vivado, ESP32, UART, VGA, debugging, physical, Digital Signal
+  Processing, Python, MATLAB]
+
+name: Naor Larian
+headline: [Electrical Engineering Student, Hardware Engineering Internship]
+
+contact: [naorlarian@gmail.com, +972-50-787-8716, linkedin.com/in/naor-larian, Central Israel]
+
+summary: >-
+  **Final-year B.Sc. Electrical & Electronics Engineering student** at Afeka (expected
+  2027) seeking a **hardware engineering internship**. Built and debugged a digital system
+  on physical FPGA hardware, integrating a microcontroller over UART with real-time video
+  output, and verified digital designs through RTL simulation and testbenches. Also brings
+  nearly four years of practical experience troubleshooting live satellite communication
+  systems.
+
+top:
+  - type: education
+    title: Education
+    items:
+      - degree: B.Sc. Electrical & Electronics Engineering
+        dates: Expected 2027
+        school: Afeka Tel Aviv Academic College of Engineering
+        note: "Specializations: Computers & Communications"
+      - degree: Practical Engineer Diploma, Electrical Engineering
+        dates: "2022"
+        school: Handessaim Tel Aviv
+        note: Graduated with honors
+
+main:
+  - type: projects
+  - type: experience
+
+experience_title: Experience
+experience:
+  - role: Technical Support Engineer
+    org: AMOS-Spacecom
+    org_note: Satellite Operator
+    dates: Dec 2022 – Present
+    bullets:
+      - >-
+        Troubleshoot **15–25 technical incidents per week** on live satellite
+        communication systems, using RF spectrum measurements, modem indicators and link
+        performance data to isolate faults.
+      - >-
+        Remotely support VSAT systems and approximately **10–15 CPI** and **10–15
+        commissioning activities** per month, coordinating with customers and
+        engineering teams.
+      - >-
+        Develop and refine **technical SOPs** that improve troubleshooting consistency
+        and make critical procedures easier to find.
+
+projects_title: Hands-On Hardware Projects
+projects:
+  - name: Cyber Gladiators
+    kind: Independent FPGA Project
+    dates: "2026"
+    stack: VHDL · Xilinx Vivado · Basys 3 (Artix-7) · ESP32 · UART · VGA
+    bullets:
+      - >-
+        Designed a modular **VHDL system** with 640 × 480 VGA output, sprite rendering,
+        FSM-based control, collision detection and game logic.
+      - >-
+        **Integrated an ESP32 microcontroller over UART** and debugged the {UART-to-VGA}
+        data path on physical hardware.
+      - >-
+        Verified RTL modules in simulation, synthesized and implemented the design in
+        Vivado, and **demonstrated the full system on a Basys 3 board**.
+  - name: RGB Median Filter
+    kind: Afeka Team Project
+    dates: "2026"
+    stack: VHDL · FSM · RAM/ROM · RTL Simulation · Testbenches
+    bullets:
+      - >-
+        Developed **VHDL components** and integrated FSM control, data buffers and
+        RAM/ROM handling for a {3 × 3} RGB median filter.
+      - >-
+        Verified module- and top-level behavior through **RTL simulation and testbenches**
+        using image test data.
+
+sidebar:
+  - title: Technical Skills
+    type: skills
+    groups:
+      - label: Digital Design
+        items: VHDL, FSM design, RTL simulation, testbenches
+      - label: Hardware & Debugging
+        items: FPGA (Artix-7 / Basys 3), ESP32, UART, VGA, on-board debugging
+      - label: Tools
+        items: Xilinx Vivado; spectrum analyzer (professional); {MATLAB/Simulink}
+          (academic)
+      - label: Programming
+        items: C, Python (academic)
+      - label: Systems Troubleshooting
+        items: Fault isolation, RF spectrum measurements, link diagnostics, technical
+          SOPs
+
+  - title: Relevant Coursework
+    type: text
+    text: Advanced Hardware Design, Digital Signal Processing, Signals & Systems,
+      Communication Systems
+
+  - title: Languages
+    type: languages
+    items:
+      - [Hebrew, Native]
+      - [English, Professional working proficiency]

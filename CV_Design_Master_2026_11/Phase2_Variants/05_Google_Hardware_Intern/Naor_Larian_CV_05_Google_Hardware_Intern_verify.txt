@@ -1,0 +1,19 @@
+[PASS] Exactly one page — 1 page(s)
+[PASS] A4 size — 595.0 × 841.9 pt
+[PASS] All fonts embedded — NotoSerif-Bold, NotoSerif-Italic, NotoSerif-Regular, NotoSerif-SemiBold
+[PASS] Searchable text present — 377 words
+[PASS] Links: email / phone / LinkedIn — mailto:naorlarian@gmail.com, tel:+972507878716, https://linkedin.com/in/naor-larian
+[PASS] Metadata title/author/keywords — title='Naor Larian – Electrical Engineering Student | Hardware Engineering Internship', author='Naor Larian'
+[PASS] No overlapping text lines — 0 overlap(s)
+[PASS] No text outside margins (clipping)
+[PASS] Reading order: PyMuPDF stream — full page
+[PASS] Every bullet intact: PyMuPDF stream — 8 bullets
+[PASS] Reading order: pdftotext -raw — full page
+[PASS] Every bullet intact: pdftotext -raw — 8 bullets
+[PASS] Reading order: pdfminer (geometric) — main column
+[PASS] Every bullet intact: pdfminer (geometric) — 8 bullets
+[WARN] Sidebar placement under geometric parsing: sidebar blocks interleave between main-column entries (whole blocks, no sentence splits; inherent to the two-column master)
+[PASS] No banned / unsupported terms
+[PASS] Target keywords present (18)
+
+OVERALL: PASS

@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
 """Extended verification of a built CV PDF (complements the gate in build.py).
 
-Usage: python3 verify.py <cv.pdf> [--baseline previous.pdf]
+Usage: python3 verify.py <cv.pdf> [--content cv.yaml] [--baseline previous.pdf]
+
+With --content, the reading-order anchors follow that variant's section order and the
+keyword check uses its `qa_keywords` list (default: the System Integration list below).
 
 Checks: page size/count, embedded fonts, links, metadata, overlapping text lines,
 extraction order in three independent extractors, banned/unsupported claims, and
 (with --baseline) engineering keywords that disappeared since the previous version.
 """
 import argparse, re, subprocess, sys
-import pymupdf
+import pymupdf, yaml
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build import normalize, reading_anchors
 from pdfminer.high_level import extract_text as pdfminer_text
 
 # Claims that must never appear (unsupported by source material or implying on-site work).
@@ -23,14 +29,19 @@ KEYWORDS = ["System Integration", "Validation", "fault isolation", "RF spectrum"
 
 
 def order_ok(text, anchors):
-    flat = " ".join(text.split()).lower()
-    pos = [flat.find(a.lower()) for a in anchors]
+    # Case-sensitive: section headings are extracted in upper case, so "EXPERIENCE"
+    # must not match the word "experience" inside the summary.
+    flat = " ".join(text.split())
+    pos = [flat.find(a) for a in anchors]
     return all(p >= 0 for p in pos) and pos == sorted(pos), pos
 
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("pdf"); ap.add_argument("--baseline")
+    ap.add_argument("--content")
     a = ap.parse_args()
+    data = normalize(yaml.safe_load(Path(a.content).read_text(encoding="utf-8"))) if a.content else None
+    keywords = (data or {}).get("qa_keywords") or KEYWORDS
     doc = pymupdf.open(a.pdf); page = doc[0]; ok = True
     def check(name, cond, detail=""):
         nonlocal ok; ok &= bool(cond)
@@ -65,19 +76,41 @@ def main():
     inside = all(37 - 1 <= w[0] and w[2] <= page.rect.width - 36 and w[3] <= page.rect.height - 30 for w in words)
     check("No text outside margins (clipping)", inside)
 
-    anchors = ["Naor Larian", "Summary", "Experience", "15–25 technical incidents", "Engineering Projects",
-               "Cyber Gladiators", "RGB Median Filter", "Education", "Technical Skills", "Languages"]
+    anchors = (["Naor Larian"] + reading_anchors(data)) if data else [
+        "Naor Larian", "SUMMARY", "EXPERIENCE", "15–25 technical incidents", "ENGINEERING PROJECTS",
+        "Cyber Gladiators", "RGB Median Filter", "EDUCATION", "TECHNICAL SKILLS", "LANGUAGES"]
     pdftotext = subprocess.run(["pdftotext", "-layout", a.pdf, "-"], capture_output=True, text=True).stdout
     raw = subprocess.run(["pdftotext", "-raw", a.pdf, "-"], capture_output=True, text=True).stdout
-    for name, t in [("PyMuPDF stream", text), ("pdftotext -raw", raw), ("pdfminer", pdfminer_text(a.pdf))]:
-        good, _ = order_ok(t, anchors if name != "pdfminer" else anchors[:7])
-        check(f"Reading order: {name}", good)
+    side_titles = {s["title"].upper() for s in data["sidebar"]} if data else {
+        "EDUCATION", "TECHNICAL SKILLS", "RELEVANT COURSEWORK", "LANGUAGES"}
+    main_anchors = [x for x in anchors if x.upper() not in side_titles]
+    bullets = []
+    if data:
+        for sec in data["main"]:
+            for it in sec.get("items") or []:
+                bullets += it.get("bullets") or []
+    norm = lambda s: re.sub(r"-\s+", "-", " ".join(re.sub(r"[*{}]", "", str(s)).split())).lower()
+    for name, t in [("PyMuPDF stream", text), ("pdftotext -raw", raw), ("pdfminer (geometric)", pdfminer_text(a.pdf))]:
+        geometric = "geometric" in name
+        good, pos = order_ok(t, main_anchors if geometric else anchors)
+        bad = [an for an, p in zip(anchors, pos) if p < 0]
+        check(f"Reading order: {name}" + (" — main column" if geometric else " — full page"), good,
+              ("not found: " + "; ".join(bad)) if bad else "")
+        flat = norm(t)
+        broken = [b[:40] for b in bullets if norm(b) not in flat]
+        check(f"Every bullet intact: {name}", not broken, ("split: " + " | ".join(broken)) if broken else f"{len(bullets)} bullets")
+        if geometric:
+            full_ok, _ = order_ok(t, anchors)
+            print(f"[{'INFO' if full_ok else 'WARN'}] Sidebar placement under geometric parsing: "
+                  + ("after main column" if full_ok else
+                     "sidebar blocks interleave between main-column entries (whole blocks, no sentence splits; "
+                     "inherent to the two-column master)"))
     del pdftotext
 
     hits = [p for p in BANNED if re.search(p, text, re.I)]
     check("No banned / unsupported terms", not hits, ", ".join(hits))
-    missing = [k for k in KEYWORDS if k.lower() not in " ".join(text.split()).lower()]
-    check("Core engineering keywords present", not missing, ("missing: " + ", ".join(missing)) if missing else "")
+    missing = [k for k in map(str, keywords) if k.lower() not in " ".join(text.split()).lower()]
+    check(f"Target keywords present ({len(keywords)})", not missing, ("missing: " + ", ".join(missing)) if missing else "")
 
     if a.baseline:
         tok = lambda s: set(re.findall(r"[A-Za-z][A-Za-z0-9\-/+]{2,}", s.lower()))

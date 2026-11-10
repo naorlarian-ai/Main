@@ -1,0 +1,123 @@
+# ---------------------------------------------------------------------------
+# Variant 06: Ground Systems Integration Engineer (ImageSat)   (DRAFT, phase 2)
+# No job description was available in the project, so this is tailored to the
+# satellite ground-systems integration role family; no employer requirements are claimed.
+# Build from CV_Design_Master_2026_11/source:
+#   python3 build.py ../Phase2_Variants/06_ImageSat_Ground_Systems/<this>.yaml \
+#           --out ../Phase2_Variants/06_ImageSat_Ground_Systems --qa-json
+# ---------------------------------------------------------------------------
+
+output_name: Naor_Larian_CV_06_ImageSat_Ground_Systems
+
+meta:
+  title: "Naor Larian – Electrical Engineering Student | Ground Systems Integration"
+  keywords: >-
+    Electrical Engineering Student, Ground Systems Integration, Satellite Ground Systems,
+    Satellite Communication, SATCOM, Operational Systems, Commissioning, CPI, System
+    Monitoring, Link Verification, Link Diagnostics, RF Troubleshooting, Fault Isolation,
+    Interference Investigation, VSAT, Modem Configuration, Service Activation, SOP, FPGA,
+    Hardware Integration
+
+qa_keywords: [satellite, operational, commissioning, CPI, system monitoring, link verification,
+  link diagnostics, RF spectrum, fault isolation, interference, VSAT, modem configuration,
+  service activation, engineering teams, SOP, integration, FPGA]
+
+name: Naor Larian
+headline: [Electrical Engineering Student, Ground Systems Integration]
+
+contact: [naorlarian@gmail.com, +972-50-787-8716, linkedin.com/in/naor-larian, Central Israel]
+
+summary: >-
+  **Final-year B.Sc. Electrical & Electronics Engineering student** (expected 2027) with
+  nearly four years supporting **operational satellite communication systems** at
+  AMOS-Spacecom. Experienced in remote commissioning support, link verification, system
+  monitoring and RF troubleshooting, working closely with customers and engineering teams.
+  Complemented by **hands-on integration experience** from an FPGA system demonstrated on
+  physical hardware.
+
+experience_title: Experience
+experience:
+  - role: Technical Support Engineer
+    org: AMOS-Spacecom
+    org_note: Satellite Operator
+    dates: Dec 2022 – Present
+    bullets:
+      - >-
+        Support **operational satellite communication systems**, handling **15–25
+        technical incidents per week** and isolating faults through RF spectrum
+        measurements, modem indicators and link data.
+      - >-
+        Remotely perform or support approximately **10–15 commissioning activities** and
+        **10–15 CPI activities** per month, including customer guidance and
+        {operator-side} RF measurements.
+      - >-
+        Provide **remote VSAT support** across modem configuration, link verification,
+        service activation, **system monitoring** and troubleshooting, per customer
+        service agreement.
+      - >-
+        Investigate **RF interference** using spectrum analysis and structured fault
+        isolation, coordinating resolution with customers and engineering teams.
+      - >-
+        Develop and refine **technical SOPs** that improve troubleshooting consistency
+        and make critical procedures easier to find.
+
+projects_title: Engineering Projects
+projects:
+  - name: Cyber Gladiators
+    kind: Independent FPGA Project
+    dates: "2026"
+    stack: VHDL · Xilinx Vivado · Basys 3 (Artix-7) · ESP32 · UART · VGA
+    bullets:
+      - >-
+        **Integrated two subsystems**, an ESP32 controller and an FPGA-based VHDL design
+        with real-time 640 × 480 VGA output, over a UART link.
+      - >-
+        Verified RTL modules in simulation, debugged the {UART-to-VGA} data path on
+        hardware, and **demonstrated the full system on a Basys 3 board**.
+  - name: RGB Median Filter
+    kind: Afeka Team Project
+    dates: "2026"
+    stack: VHDL · FSM · RAM/ROM · RTL Simulation · Testbenches
+    bullets:
+      - >-
+        Integrated FSM control, data buffers and RAM/ROM handling into a {3 × 3} RGB
+        median filter, verified in RTL simulation.
+
+sidebar:
+  - title: Education
+    type: education
+    items:
+      - degree: B.Sc. Electrical & Electronics Engineering
+        dates: Expected 2027
+        school: Afeka Tel Aviv Academic College of Engineering
+        note: "Specializations: Computers & Communications"
+      - degree: Practical Engineer Diploma, Electrical Engineering
+        dates: "2022"
+        school: Handessaim Tel Aviv
+        note: Graduated with honors
+
+  - title: Technical Skills
+    type: skills
+    groups:
+      - label: Satellite Communication Systems
+        items: VSAT, modem configuration, service activation, system monitoring
+          (remote)
+      - label: RF & Diagnostics
+        items: RF spectrum measurements, link diagnostics, link verification,
+          interference investigation, fault isolation
+      - label: Commissioning & Procedures
+        items: Commissioning and CPI activities (remote), technical SOPs
+      - label: Hardware & FPGA
+        items: VHDL, Xilinx Vivado, {Artix-7 / Basys 3}, ESP32, UART
+      - label: Programming & Tools
+        items: Spectrum analyzer (professional); C, Python, {MATLAB/Simulink} (academic)
+
+  - title: Relevant Coursework
+    type: text
+    text: Communication Systems, Signals & Systems, Digital Signal Processing
+
+  - title: Languages
+    type: languages
+    items:
+      - [Hebrew, Native]
+      - [English, Professional working proficiency]
